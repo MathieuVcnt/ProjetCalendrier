@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@page import="java.time.Month"%>
 <%@page import="java.time.DayOfWeek"%>
 <%@page import="java.time.LocalDate"%>
@@ -13,6 +14,38 @@
 
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Bonjour <security:authentication property="principal.username"/> <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+    <form:form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/logout" method="post">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="logout">Deconnexion</button>
+    </form:form>
+  </div>
+</nav>
 <%! 
 	public class Cpt{
 		private int val=0;
@@ -154,7 +187,7 @@
 		</tbody>
 	</table>
 	<div class="mx-auto" style="width: 200px;">
-	<form method="get" action="/calendrier">
+	<form method="get" action="/index">
 		<div class="btn-group" role="group" aria-label="Basic example">
 			<a href="index?date=<%=date.minusMonths(1)%>" title="precedent"
 				class="btn btn-outline-secondary">Précédent</a> &emsp;&emsp; 
