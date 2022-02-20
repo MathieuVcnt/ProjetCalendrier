@@ -1,6 +1,7 @@
 package fr.da2i.projetcal.controleur;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,9 +32,18 @@ public class Controleur {
 		return "index";
 	}
 	
+	@GetMapping("/profil")
+	public String profil(@RequestParam String username,ModelMap model) {
+		Optional<Utilisateur> users = urepo.findById(username);
+		model.addAttribute("utilisateurs", users.get());
+		return "profil";
+	}
+	
+	
     @RequestMapping("/inscription")
     public String inscription(@RequestParam String username, @RequestParam String password, 
-    		@RequestParam String email,@RequestParam String tel, ModelMap model) throws IOException {
+    		@RequestParam String email,@RequestParam String tel,@RequestParam String adresse,
+    		@RequestParam String ville, ModelMap model) throws IOException {
     	if(urepo.existsById(username)) {
     		return "/login?inscription=true&badInfo=username";
     	}else {
@@ -45,6 +55,8 @@ public class Controleur {
         	user.setEnabled(true);
         	user.setEmail(email);
         	user.setTel(tel);
+        	user.setAdresse(adresse);
+        	user.setVille(ville);
             urepo.save(user);
             model.addAttribute("msg","Inscription reussie");
             return login(model);

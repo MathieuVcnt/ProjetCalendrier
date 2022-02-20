@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/index","/login","/inscription").permitAll()
+		http.authorizeRequests().antMatchers("/index","/login","/inscription","/profil").permitAll()
 				.anyRequest().authenticated().and()
 //.httpBasic();
 //la page de login est fournie
@@ -44,7 +44,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-	
 		//auth.inMemoryAuthentication().withUser("paul").password(encoder.encode("paul")).authorities("USER");
 		//auth.inMemoryAuthentication().withUser("jean").password(encoder.encode("jean")).authorities("ADMIN");
 		Utilisateur admin = new Utilisateur();

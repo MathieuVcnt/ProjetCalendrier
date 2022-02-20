@@ -22,6 +22,10 @@ public class Utilisateur {
     private String email;
     
     private String tel;
+    
+    private String adresse;
+    
+    private String ville;
 
 	public String getUsername() {
 		return username;
@@ -70,6 +74,23 @@ public class Utilisateur {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-    
 
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+	
+	
+   
 }
