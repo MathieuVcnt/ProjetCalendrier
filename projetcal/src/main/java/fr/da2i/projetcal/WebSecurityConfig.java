@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,16 +28,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/index","/login","/inscription","/profil").permitAll()
+			http
+				.authorizeRequests().mvcMatchers("/index","/profil").authenticated()
+				.mvcMatchers("/login","/inscription").permitAll()
 				.anyRequest().authenticated().and()
 //.httpBasic();
 //la page de login est fournie
-				.formLogin().loginPage("/login").loginProcessingUrl("/index").defaultSuccessUrl("/index",true)
-// .loginPage("/login")
-				.permitAll().and()
+				.formLogin().loginPage("/login").loginProcessingUrl("/index").defaultSuccessUrl("/index",true)// .loginPage("/login")
+				.and()
 // la page de logout est fournie
 				.logout()
-// on redirige où on veut .logoutSuccessUrl("/public")
+// on redirige oï¿½ on veut .logoutSuccessUrl("/public")
 				.permitAll().and().rememberMe();
 	}
 	

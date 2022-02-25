@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page import="java.time.Month"%>
 <%@page import="java.time.DayOfWeek"%>
 <%@page import="java.time.LocalDate"%>
@@ -14,7 +15,6 @@
 
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" >Bonjour <security:authentication property="principal.username"/></a>
 
