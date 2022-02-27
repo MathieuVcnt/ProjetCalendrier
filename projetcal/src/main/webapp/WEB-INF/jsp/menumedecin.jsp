@@ -35,20 +35,6 @@
     </form:form>
   </div>
 </nav>
-<%! 
-	public class Cpt{
-		private int val=0;
-		
-		public String getValeur(){
-			return ""+val;
-		}
-		public void incremente(){
-			val++;
-		}
-	}
-	%>
-	
-	
 <%	
 	LocalDate dateJour = LocalDate.now();
 	LocalDate date = null;
@@ -62,6 +48,7 @@
 	}
 	%>
 	<div align="center">
+		<h1>Bienvenue sur le planning Médecin</h1><br>
 		<h2><%=date.getMonth() + "  " + date.getYear()%></h2>
 	</div>
 	<br>
@@ -101,16 +88,7 @@
 							<%
 						}else{
 							%>
-							<td onclick="location.href='index?date=<%=date%>'"><p class="text-body"><%=nbr%></p>
-							<%
-							Cpt global = (Cpt)session.getAttribute("global"+nbr);
-								if(global==null){
-									global=new Cpt();	
-									session.setAttribute("global"+nbr,global);
-								}
-								global.incremente(); 
-								%>
-								<%=global.getValeur() %>
+							<td onclick="location.href='menumedecin?date=<%=date%>'"><p class="text-body"><%=nbr%></p>
 							
 							</td>
 							<%								
@@ -128,18 +106,9 @@
 							<%
 						}else{
 								%>
-							<td onclick="location.href='index?date=<%=date%>'">
+							<td onclick="location.href='menumedecin?date=<%=date%>'">
 								<p class="text-body"><%=nbr%>
 								</p>
-								<%
-								Cpt test = (Cpt)session.getAttribute("test"+nbr);
-								if(test==null){
-									test=new Cpt();	
-									session.setAttribute("test"+nbr,test);
-								}
-								test.incremente(); 
-								%>
-								<%=test.getValeur() %>
 							</td>
 							<%							
 						}
@@ -153,16 +122,7 @@
 					}
 					
 					%>
-					<td onclick="location.href='index?date=<%=date%>'"><p class="text-body"><%=nbr%></p>
-					<%
-					Cpt ligne = (Cpt)session.getAttribute("ligne"+nbr);
-					if(ligne==null){
-						ligne=new Cpt();	
-						session.setAttribute("ligne"+nbr,ligne);
-					}
-					ligne.incremente(); 
-					%>
-					<%=ligne.getValeur() %>
+					<td onclick="location.href='menumedecin?date=<%=date%>'"><p class="text-body"><%=nbr%></p>
 					</td>
 					<%
 					}
@@ -176,14 +136,17 @@
 		</tbody>
 	</table>
 	<div class="mx-auto" style="width: 200px;">
-	<form method="get" action="/index">
+	<form method="get" action="/menumedecin">
 		<div class="btn-group" role="group" aria-label="Basic example">
-			<a href="index?date=<%=date.minusMonths(1)%>" title="precedent"
+			<a href="menumedecin?date=<%=date.minusMonths(1)%>" title="precedent"
 				class="btn btn-outline-secondary">Précédent</a> &emsp;&emsp; 
-			<a href="index?date=<%=date.plusMonths(1)%>" title="suivant"
+			<a href="menumedecin?date=<%=date.plusMonths(1)%>" title="suivant"
 				class="btn btn-outline-secondary">Suivant</a>
 		</div>
 	</form>
+		&emsp;&emsp; <div class="btn-group" role="group" aria-label="Basic example">
+		<a href="menu" class="btn btn-outline-secondary">Retour au Menu</a>
+	</div>
 	</div>
 </body>
 </html>

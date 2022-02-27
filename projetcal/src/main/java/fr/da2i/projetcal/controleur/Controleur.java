@@ -26,10 +26,23 @@ public class Controleur {
 	public String login(ModelMap model) {
 		return "login";
 	}
+	@GetMapping("/menu")
+	public String menu() {
+		return "menu";
+	}
 	
-	@GetMapping("/index")  
-	public String home() {
-		return "index";
+	@GetMapping("/menupiscine")  
+	public String homePiscine() {
+		return "menupiscine";
+	}
+	@GetMapping("/menumedecin")  
+	public String homeMedecin() {
+		return "menumedecin";
+	}
+	
+	@GetMapping("/planning")
+	public String planning(ModelMap model) {
+		return "planning";
 	}
 	
 	@GetMapping("/profil")

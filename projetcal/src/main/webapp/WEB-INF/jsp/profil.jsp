@@ -20,10 +20,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/index">Accueil</a>
+        <a class="nav-link" href="/menu">Menu</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/index">Mes réservations</a>
+        <a class="nav-link" href="/menu">Mes réservations</a>
       </li>
     </ul>
     <form:form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/logout" method="post">

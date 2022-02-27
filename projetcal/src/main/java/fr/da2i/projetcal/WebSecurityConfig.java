@@ -29,12 +29,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 			http
-				.authorizeRequests().mvcMatchers("/index","/profil").authenticated()
+				.authorizeRequests().mvcMatchers("/menupiscine","/profil","/planning","/menu","menumedecin").authenticated()
 				.mvcMatchers("/login","/inscription").permitAll()
 				.anyRequest().authenticated().and()
 //.httpBasic();
 //la page de login est fournie
-				.formLogin().loginPage("/login").loginProcessingUrl("/index").defaultSuccessUrl("/index",true)// .loginPage("/login")
+				.formLogin().loginPage("/login").loginProcessingUrl("/menu").defaultSuccessUrl("/menu",true)// .loginPage("/login")
 				.and()
 // la page de logout est fournie
 				.logout()

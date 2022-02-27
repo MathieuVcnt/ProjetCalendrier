@@ -1,4 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page import="java.time.Month"%>
 <%@page import="java.time.DayOfWeek"%>
 <%@page import="java.time.LocalDate"%>
@@ -13,28 +15,31 @@
 
 </head>
 <body>
-<%! 
-	public class Cpt{
-		private int val=0;
-		
-		public String getValeur(){
-			return ""+val;
-		}
-		public void incremente(){
-			val++;
-		}
-	}
-	%>
-	
-	
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" >Bonjour <security:authentication property="principal.username"/></a>
+
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/profil?username=<security:authentication property="principal.username"/>">Mon Profil</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+      </li>
+    </ul>
+    <form:form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/logout" method="post">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="logout">Deconnexion</button>
+    </form:form>
+  </div>
+</nav>
 <%	
 	LocalDate dateJour = LocalDate.now();
 	LocalDate date = null;
 	if (request.getParameter("date") != null) {
 		dateJour = LocalDate.parse(request.getParameter("date"));
-	}
-	if(request.getAttribute("moisprecedent")!=null){
-		dateJour = (LocalDate) request.getAttribute("moisprecedent");
 	}
 	if (dateJour.getMonthValue() < 10) {
 		date = LocalDate.parse(dateJour.getYear() + "-0" + dateJour.getMonthValue() + "-01");
@@ -43,6 +48,7 @@
 	}
 	%>
 	<div align="center">
+		<h1>Bienvenue sur le planning Piscine</h1><br>
 		<h2><%=date.getMonth() + "  " + date.getYear()%></h2>
 	</div>
 	<br>
@@ -82,16 +88,7 @@
 							<%
 						}else{
 							%>
-							<td onclick="location.href='index.jsp?date=<%=date%>'"><p class="text-body"><%=nbr%></p>
-							<%
-							Cpt global = (Cpt)session.getAttribute("global"+nbr);
-								if(global==null){
-									global=new Cpt();	
-									session.setAttribute("global"+nbr,global);
-								}
-								global.incremente(); 
-								%>
-								<%=global.getValeur() %>
+							<td onclick="location.href='menupiscine?date=<%=date%>'"><p class="text-body"><%=nbr%></p>
 							
 							</td>
 							<%								
@@ -109,18 +106,9 @@
 							<%
 						}else{
 								%>
-							<td onclick="location.href='index.jsp?date=<%=date%>'">
+							<td onclick="location.href='menupiscine?date=<%=date%>'">
 								<p class="text-body"><%=nbr%>
 								</p>
-								<%
-								Cpt test = (Cpt)session.getAttribute("test"+nbr);
-								if(test==null){
-									test=new Cpt();	
-									session.setAttribute("test"+nbr,test);
-								}
-								test.incremente(); 
-								%>
-								<%=test.getValeur() %>
 							</td>
 							<%							
 						}
@@ -134,16 +122,7 @@
 					}
 					
 					%>
-					<td onclick="location.href='index.jsp?date=<%=date%>'"><p class="text-body"><%=nbr%></p>
-					<%
-					Cpt ligne = (Cpt)session.getAttribute("ligne"+nbr);
-					if(ligne==null){
-						ligne=new Cpt();	
-						session.setAttribute("ligne"+nbr,ligne);
-					}
-					ligne.incremente(); 
-					%>
-					<%=ligne.getValeur() %>
+					<td onclick="location.href='menupiscine?date=<%=date%>'"><p class="text-body"><%=nbr%></p>
 					</td>
 					<%
 					}
@@ -157,14 +136,17 @@
 		</tbody>
 	</table>
 	<div class="mx-auto" style="width: 200px;">
-	<form method="get" action="/calendrier">
+	<form method="get" action="/menupiscine">
 		<div class="btn-group" role="group" aria-label="Basic example">
-			<a href="/calendrier/{moisprecedent}" path="moisprecedent" value="<%=date.minusMonths(1)%>"
+			<a href="menupiscine?date=<%=date.minusMonths(1)%>" title="precedent"
 				class="btn btn-outline-secondary">Précédent</a> &emsp;&emsp; 
-			<a href="index.jsp?date=<%=date.plusMonths(1)%>" title="suivant"
+			<a href="menupiscine?date=<%=date.plusMonths(1)%>" title="suivant"
 				class="btn btn-outline-secondary">Suivant</a>
 		</div>
 	</form>
+	&emsp;&emsp; <div class="btn-group" role="group" aria-label="Basic example">
+		<a href="menu" class="btn btn-outline-secondary">Retour au Menu</a>
+	</div>
 	</div>
 </body>
 </html>

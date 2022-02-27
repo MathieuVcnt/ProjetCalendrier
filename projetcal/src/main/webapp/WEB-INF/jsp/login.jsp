@@ -67,7 +67,7 @@
     <h1>Bienvenue sur la page de connexion</h1>
   </div>
   <div class="card-body">
-    <form:form action="${pageContext.request.contextPath}/index" method="post">
+    <form:form action="${pageContext.request.contextPath}/menu" method="post">
         <div class="row justify-content-md-center">
     	<div class="center col-md-3 border-right border-left">
     	<fieldset>
