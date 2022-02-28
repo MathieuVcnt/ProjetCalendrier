@@ -1,4 +1,4 @@
-<%@page import="fr.da2i.projetcal.entities.UtilisateurRepository"%>
+<%@page import="fr.da2i.projetcal.repository.UtilisateurRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>

@@ -1,4 +1,4 @@
-package fr.da2i.projetcal.entities;
+package fr.da2i.projetcal.repository;
 
 import java.util.List;
 import java.util.Optional;

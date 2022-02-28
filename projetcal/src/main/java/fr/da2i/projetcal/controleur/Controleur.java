@@ -3,6 +3,7 @@ package fr.da2i.projetcal.controleur;
 import java.io.IOException;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.da2i.projetcal.entities.*;
+import fr.da2i.projetcal.repository.MedecinRepository;
+import fr.da2i.projetcal.repository.UtilisateurRepository;
 
 @Controller
 public class Controleur {
 	
 	@Autowired
 	UtilisateurRepository urepo;
+	
+	@Autowired
+	MedecinRepository mrepo;
 	
 	@GetMapping("/login")
 	public String login(ModelMap model) {
@@ -40,9 +46,9 @@ public class Controleur {
 		return "menumedecin";
 	}
 	
-	@GetMapping("/planning")
-	public String planning(ModelMap model) {
-		return "planning";
+	@GetMapping("/planningmedecin")
+	public String planningMedecin(ModelMap model) {
+		return "planningmedecin";
 	}
 	
 	@GetMapping("/profil")
@@ -75,4 +81,13 @@ public class Controleur {
             return login(model);
     	}
     }
+    
+    @RequestMapping("/planningmedecin")
+    public String Priserdv(@RequestParam String heure, ModelMap model,  HttpServletRequest request) throws IOException{
+    	Rdvmedecin rdv = new Rdvmedecin();
+    	String date = request.getParameter("date");
+    	return "planningmedecin";
+    }
+    
+    
 }

@@ -14,6 +14,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import fr.da2i.projetcal.entities.*;
+import fr.da2i.projetcal.repository.UtilisateurRepository;
 
 
 @Configuration
@@ -29,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 			http
-				.authorizeRequests().mvcMatchers("/menupiscine","/profil","/planning","/menu","menumedecin").authenticated()
+				.authorizeRequests().mvcMatchers("/menupiscine","/profil","/planningmedecin","/menu","menumedecin").authenticated()
 				.mvcMatchers("/login","/inscription").permitAll()
 				.anyRequest().authenticated().and()
 //.httpBasic();

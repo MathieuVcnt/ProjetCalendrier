@@ -87,8 +87,10 @@
 							<td class="table-secondary " ><p class="text-black-50"><%=nbr%></p></td>
 							<%
 						}else{
+							LocalDate daterdv = date.minusDays(date.getDayOfMonth()).plusDays(nbr);
 							%>
-							<td onclick="location.href='menumedecin?date=<%=date%>'"><p class="text-body"><%=nbr%></p>
+							<td onclick="location.href='planningmedecin?date=<%=daterdv%>'">
+							<p class="text-body"><%=nbr%></p>
 							
 							</td>
 							<%								
