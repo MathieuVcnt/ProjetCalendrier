@@ -1,12 +1,14 @@
 package fr.da2i.projetcal.controleur;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,9 @@ public class Controleur {
 	
 	@Autowired
 	MedecinRepository mrepo;
+	
+	@Autowired
+	private JavaMailSender sender;
 	
 	@GetMapping("/login")
 	public String login(ModelMap model) {
@@ -83,9 +88,13 @@ public class Controleur {
     }
     
     @RequestMapping("/planningmedecin")
-    public String Priserdv(@RequestParam String heure, ModelMap model,  HttpServletRequest request) throws IOException{
+    public String Priserdv(@RequestParam String heure,@RequestParam Date date, ModelMap model,  HttpServletRequest request) throws IOException{
     	Rdvmedecin rdv = new Rdvmedecin();
-    	String date = request.getParameter("date");
+    	String username = request.getParameter("username");
+    	rdv.setDate(date);
+    	//rdv.getUser().setUsername(username);
+    	mrepo.save(rdv);
+    	model.addAttribute("msg","Réservation réussie");
     	return "planningmedecin";
     }
     

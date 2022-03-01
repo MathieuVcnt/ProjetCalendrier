@@ -25,7 +25,11 @@ Date date =  Date.valueOf(request.getParameter("date"));
 <br><br>
 <h1>Bienvenue sur la page des Rendez-vous</h1>
 <br><br>
-<h5>A quelle heure souhaitez-vous prendre rendez-vous pour la date du <%=date %> ?</h5><br>
+<h5>A quelle heure souhaitez-vous prendre rendez-vous pour la date du <%=date %> ?</h5><br><br>
+
+<c:if test="${msg!=null}">
+	<p style="color: green">${msg}</p>
+</c:if>
 <div style="width:60%">
 <table class="table table-bordered">
   <thead class="table-dark">
@@ -48,7 +52,7 @@ int i=8;
   %>
   <c:forEach items="<%=heure %>" var="element">
     <tr>
-      <td align="center"><%=i %></td>
+      <td align="center"><%=i %>h</td>
       <td>
       <form action="" method="post">
       	<div class="d-flex justify-content-center">
@@ -58,7 +62,7 @@ int i=8;
  	  </form>
  	  </td>
     </tr>
-      <%i++;  %>
+      <%i++;%>
     </c:forEach>
   </tbody>
 </table>

@@ -24,11 +24,6 @@
       <li class="nav-item">
         <a class="nav-link" href="/profil?username=<security:authentication property="principal.username"/>">Mon Profil</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-      </li>
     </ul>
     <form:form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/logout" method="post">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="logout">Deconnexion</button>
@@ -107,8 +102,9 @@
 							<td class="table-secondary"><p class="text-black-50"><%=nbr%></p></td>
 							<%
 						}else{
+							LocalDate daterdv = date.minusDays(date.getDayOfMonth()).plusDays(nbr);
 								%>
-							<td onclick="location.href='menumedecin?date=<%=date%>'">
+							<td onclick="location.href='planningmedecin?date=<%=daterdv%>'">
 								<p class="text-body"><%=nbr%>
 								</p>
 							</td>
@@ -122,9 +118,9 @@
 					if (nbr % date.lengthOfMonth() == 1) {
 						nbr = 1;
 					}
-					
+					LocalDate daterdv = date.minusDays(date.getDayOfMonth()).plusDays(nbr);
 					%>
-					<td onclick="location.href='menumedecin?date=<%=date%>'"><p class="text-body"><%=nbr%></p>
+					<td onclick="location.href='planningmedecin?date=<%=daterdv%>'"><p class="text-body"><%=nbr%></p>
 					</td>
 					<%
 					}

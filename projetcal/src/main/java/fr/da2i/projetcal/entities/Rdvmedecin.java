@@ -1,6 +1,7 @@
 package fr.da2i.projetcal.entities;
 
 import java.sql.Date;
+import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,8 +65,6 @@ public class Rdvmedecin {
 
 	public void setUser(Utilisateur user) {
 		this.user = user;
-	}
-	
-	
+	}	
 	
 }
