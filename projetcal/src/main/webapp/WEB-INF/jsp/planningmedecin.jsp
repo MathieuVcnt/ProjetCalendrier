@@ -23,7 +23,7 @@ Date date =  Date.valueOf(request.getParameter("date"));
 %>
 <div align="center">
 <br><br>
-<h1>Bienvenue sur la page des Rendez-vous</h1>
+<h1>Bienvenue sur la page des Rendez-vous <security:authentication property="principal.username"/></h1>
 <br><br>
 <h5>A quelle heure souhaitez-vous prendre rendez-vous pour la date du <%=date %> ?</h5><br><br>
 

@@ -2,11 +2,9 @@ package fr.da2i.projetcal.controleur;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -16,10 +14,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import fr.da2i.projetcal.entities.*;
+import fr.da2i.projetcal.entities.Rdvmedecin;
+import fr.da2i.projetcal.entities.Utilisateur;
 import fr.da2i.projetcal.repository.MedecinRepository;
 import fr.da2i.projetcal.repository.UtilisateurRepository;
+
 
 @Controller
 public class Controleur {
@@ -53,6 +52,7 @@ public class Controleur {
 	
 	@GetMapping("/planningmedecin")
 	public String planningMedecin(ModelMap model) {
+		urepo.findAll();
 		return "planningmedecin";
 	}
 	
@@ -88,13 +88,14 @@ public class Controleur {
     }
     
     @RequestMapping("/planningmedecin")
-    public String Priserdv(@RequestParam String heure,@RequestParam Date date, ModelMap model,  HttpServletRequest request) throws IOException{
+    public String Priserdv(@RequestParam String heure,@RequestParam Date date,
+    		ModelMap model,  HttpServletRequest request) throws IOException{
+    	//mrepo.findByUser(username);
     	Rdvmedecin rdv = new Rdvmedecin();
-    	String username = request.getParameter("username");
     	rdv.setDate(date);
-    	//rdv.getUser().setUsername(username);
+    	//rdv.setUser(urepo.findById(username).get());
     	mrepo.save(rdv);
-    	model.addAttribute("msg","RÃ©servation rÃ©ussie");
+    	model.addAttribute("msg","Réservation réussie");
     	return "planningmedecin";
     }
     

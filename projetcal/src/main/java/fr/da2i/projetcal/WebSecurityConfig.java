@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable();
 			http
 				.authorizeRequests().mvcMatchers("/menupiscine","/profil","/planningmedecin","/menu","menumedecin").authenticated()
 				.mvcMatchers("/login","/inscription").permitAll()
